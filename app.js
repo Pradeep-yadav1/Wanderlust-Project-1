@@ -65,11 +65,11 @@ app.post("/listings", async (req, res) => {
 });
 
 //edit route
-app.get("listings/:id/edit", async (req, res) => {
+app.get("/listings/:id/edit", async (req, res) => {
   let { id } = req.params;
   const listing = await Listing.findById(id);
-  res.render("./listings/edit.ejs", { listing });
-  res.send("hello");
+  // console.log(listing);
+  res.render("listings/edit.ejs", { listing });
 });
 
 //update route
@@ -80,11 +80,12 @@ app.put("/listings/:id", async (req, res) => {
 });
 
 //delete route
-app.delete("/listings/:id",async(req,res) => {
-  let {id} = req.params;
+app.delete("/listings/:id", async (req, res) => {
+  let { id } = req.params;
   await Listing.findByIdAndDelete(id);
   res.redirect("/listings");
-})
+});
+
 app.listen(8080, () => {
   console.log("port is listening at port 8080");
 });
